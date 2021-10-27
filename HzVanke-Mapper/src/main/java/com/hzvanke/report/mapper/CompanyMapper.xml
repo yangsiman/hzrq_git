@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzvanke.report.dao.CompanyDao">
+    <resultMap type="com.hzvanke.report.pojo.Company" id="CompanyMapper">
+        <id column="id" property="id"/>
+        <result column="companyName" property="companyName"/>
+        <result column="companyId" property="companyId"/>
+        <result column="createTime" property="createTime"/>
+        <result column="df" property="df"/>
+        <result column="jtPm" property="jtPm"/>
+        <result column="qtyZhs" property="qtyZhs"/>
+        <result column="revisitType" property="revisitType"/>
+        <result column="jtdf" property="jtdf"/>
+        <result column="ljqtyYbs" property="ljqtyYbs"/>
+        <result column="ljdf" property="ljdf"/>
+    </resultMap>
+
+
+    <select id="findById" resultMap="CompanyMapper">
+        select * from company where id=#{id}
+    </select>
+
+    <select id="findObjectList" resultMap="CompanyMapper">
+        select * from company where ${key}=#{value}
+    </select>
+
+
+    <select id="findList" resultMap="CompanyMapper" >
+        select * from company
+        order by createTime desc
+    </select>
+
+
+    <insert id="add" parameterType="com.hzvanke.report.pojo.Company">
+    insert into company (id,companyName,companyId,createTime,df,jtPm,qtyZhs,revisitType,jtdf,ljqtyYbs,ljdf)
+     values (
+        #{id},#{companyName},#{companyId},#{createTime},#{df},#{jtPm},#{qtyZhs},#{revisitType},#{jtdf},#{ljqtyYbs},#{ljdf}
+        )
+    </insert>
+
+    <!--
+        功能说明：修改记录
+        参数说明：实体类
+        作者：莫宁辉，开发时间：2019-08-23，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <update id="update" parameterType="com.hzvanke.report.pojo.Company">
+        update company
+        <set>
+            <if test="companyName!=null and companyName!=''">companyName=#{companyName},</if>
+            <if test="companyId!=null and companyId!=''">companyId=#{companyId},</if>
+            <if test="createTime!=null ">createTime=#{createTime},</if>
+            <if test="df!=null ">df=#{df},</if>
+            <if test="jtPm!=null ">jtPm=#{jtPm},</if>
+            <if test="qtyZhs!=null ">qtyZhs=#{qtyZhs},</if>
+            <if test="revisitType!=null and revisitType !='' ">revisitType=#{revisitType},</if>
+            <if test="jtdf!=null ">jtdf=#{jtdf},</if>
+            <if test="ljqtyYbs!=null ">ljqtyYbs=#{ljqtyYbs},</if>
+            <if test="ljdf!=null ">ljdf=#{ljdf}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!--
+        功能说明：根据主键ID集合批量删除
+        参数说明：listKeyid：主键ID集合
+        作者：莫宁辉，开发时间：2019-08-23，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <delete id="delete" parameterType="java.util.List">
+        delete from company
+        where id in
+        <foreach collection="listKeyid" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

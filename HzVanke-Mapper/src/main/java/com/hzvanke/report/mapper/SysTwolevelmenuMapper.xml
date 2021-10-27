@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzvanke.report.dao.SysTwolevelmenuDao" >
+  <resultMap id="SysTwolevelmenuMapper" type="com.hzvanke.report.pojo.SysTwolevelmenu" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="OneLevelMenuId" property="oneLevelMenuid" jdbcType="VARCHAR" />
+    <result column="MenuName" property="menuName" jdbcType="VARCHAR" />
+    <result column="MenuCode" property="menuCode" jdbcType="VARCHAR" />
+    <result column="Sort" property="sort" jdbcType="INTEGER" />
+    <result column="PageUrl" property="pageUrl" jdbcType="VARCHAR" />
+    <result column="ClassName" property="className" jdbcType="VARCHAR" />
+    <result column="Target" property="target" jdbcType="VARCHAR" />
+  </resultMap>
+
+    <!--
+        功能说明：新增数据
+        参数说明：实体类
+        作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <insert id="add" parameterType="com.hzvanke.report.pojo.SysTwolevelmenu">
+    insert into sys_twolevelmenu (id,onelevelmenuid,menuname,menucode,sort,pageurl,classname,target)
+     values (#{id},#{oneLevelMenuid},#{menuName},#{menuCode},#{sort},#{pageUrl},#{className},#{target})
+    </insert>
+
+    <!--
+        功能说明：修改数据
+        参数说明：实体类
+        作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <update id="update" parameterType="com.hzvanke.report.pojo.SysTwolevelmenu">
+    update sys_twolevelmenu set
+        <if test="oneLevelMenuid!=null and oneLevelMenuid!=''">
+            onelevelmenuid=#{oneLevelMenuid},
+        </if>
+        <if test="menuName!=null and menuName!=''">
+            menuname=#{menuName},</if>
+        <if test="menuCode!=null and menuCode!=''">menucode=#{menuCode},
+        </if>
+        <if test="sort!=null and sort!=''">
+            sort=#{sort},pageurl=#{pageUrl},
+        </if>
+        <if test="className!=null and className!=''">
+            classname=#{className},
+        </if>
+        <if test="target!=null and target!=''">
+            target=#{target}
+        </if>
+  where id=#{id}
+    </update>
+
+    <!--
+        功能说明：修改排序号
+        参数说明：
+                id：主键ID
+                sort：排序号
+        作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <update id="updateSort">
+		update sys_twolevelmenu
+		set
+        <if test="sort!=null and sort!=''">sort=#{sort}</if>
+		where id=#{id}
+	</update>
+
+    <!--
+        功能说明：根据ID集合批量删除
+        参数说明：listKeyid：主键ID集合
+        作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <delete id="del" parameterType="java.util.List">
+        delete from sys_twolevelmenu where id in
+        <foreach collection="listKeyid" index="index" open="(" separator="," close=")" item="item">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!--
+        功能说明：根据ID获取一条记录
+        参数说明：id：主键ID
+        作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <select id="findById" resultMap="SysTwolevelmenuMapper">
+        select * from sys_twolevelmenu where id=#{id}
+    </select>
+
+    <!--
+        功能说明：根据编号获取一条记录
+        参数说明：menucode：菜单的编号
+        作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <select id="findByCode" resultMap="SysTwolevelmenuMapper">
+        select * from sys_twolevelmenu where MenuCode=#{menucode}
+    </select>
+
+    <!--
+        功能说明：获取最大排序号
+        参数说明：onelevelmenuid：一级菜单ID
+        作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <select id="findMaxSort" resultType="int">
+        select IFNULL(MAX(sort),0) from sys_twolevelmenu where onelevelmenuid=#{onelevelmenuid}
+    </select>
+
+    <!--
+        功能说明：根据一级菜单id获取所属的二级菜单
+        参数说明：onelevelmenuid：一级菜单ID
+        作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+  <select id="findByOneLevelMenuId" resultMap="SysTwolevelmenuMapper">
+    select * from sys_twolevelmenu where OneLevelMenuId=#{onelevelmenuid} order by sort
+    </select>
+
+    <!--
+        功能说明：获取指定编号的记录数（验证编号是否存在时使用）
+        参数说明：menucode：菜单的编号
+        作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <select id="countByCode" resultType="int">
+        select count(1) from sys_twolevelmenu where menucode=#{menucode}
+        <if test="id != null and id != ''">
+            and id!=#{id}
+        </if>
+    </select>
+</mapper>

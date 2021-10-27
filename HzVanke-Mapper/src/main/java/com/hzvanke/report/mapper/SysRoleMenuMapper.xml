@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzvanke.report.dao.SysRoleMenuDao" >
+  <resultMap id="BaseResultMap" type="com.hzvanke.report.pojo.SysRoleMenu" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="RoleId" property="roleId" jdbcType="VARCHAR" />
+    <result column="MenuId" property="menuId" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <!--
+        功能说明：新增数据
+        参数说明：实体类
+        作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+  <insert id="add" parameterType="com.hzvanke.report.pojo.SysRoleMenu">
+    insert into sys_role_menu(id,roleid,menuid)
+    values(#{id},#{roleId},#{menuId})
+  </insert>
+
+  <!--
+        功能说明：根据角色ID删除对应的所有二级菜单配置
+        参数说明：roleid：角色ID
+        作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+  <delete id="del">
+    delete from sys_role_menu where roleid=#{roleid}
+  </delete>
+
+  <!--
+        功能说明：根据角色ID获取角色对应的所有二级菜单信息
+        参数说明：roleid：角色ID
+        作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+  <select id="findByRoleid" resultType="com.hzvanke.report.pojo.SysTwolevelmenu">
+    select * from sys_twolevelmenu where id in(
+      select menuid from sys_role_menu where roleid=#{roleid}
+    ) order by MenuCode
+  </select>
+
+
+  <!--
+        功能说明：根据角色ID获取角色对应的所有一级菜单信息
+        参数说明：roleid：角色ID
+        作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+  <select id="findOneLevelMenuByRoleid" resultType="com.hzvanke.report.pojo.SysOnelevelmenu">
+    select * from sys_onelevelmenu where id in(
+      select onelevelmenuid from sys_twolevelmenu where id in(
+        select menuid from sys_role_menu where roleid=#{roleid}
+      ) group by onelevelmenuid
+    ) order by sort
+  </select>
+</mapper>

@@ -1,0 +1,120 @@
+﻿/* *******************************************************************
+ *编写作者：蒋斌
+ *添加日期：2008-10-13  最后修改日期： 最后修改人
+ *功能描述：内页页尾或分页导航条样式
+ ********************************************************************/
+.pagenav
+{
+	padding:5px 10px 5px 10px;
+	text-align:right;
+    font-size:13px;
+}
+.pagenav select{
+	height:30px;
+	width:auto;
+
+}
+
+.pagenav a
+{
+	padding:5px 5px 5px 5px;
+	margin-left:5px;
+	text-decoration:none;
+}
+
+.pagenav span
+{
+	line-height: 12px;
+	height: 12px;
+	padding: 5px 3px 3px 3px;
+	margin-left:5px;
+	text-align:center;
+}
+
+.pagenav a
+{
+	color:#303030;
+}
+
+.pagenav a.pagenumb
+{
+	min-width:20px;
+	border: solid 1px #e8e8e8;
+	cursor:pointer;
+}
+
+.pagenav a.pagenumb:hover
+{
+	min-width:20px;
+	border: solid 1px #b3b2b2;
+	background-color:#f7f7f7;
+	cursor:pointer;
+	color:#f55803;
+}
+
+.pagenav a.pagenumb_now
+{
+	background-color:#f7f7f7;
+	min-width:20px;
+	border: solid 1px #8a8a8a;
+	cursor:pointer;
+	color:Red;
+	font-weight:bold;
+	font-size:13px;
+}
+
+/*
+*html #pagenav a.pagenumb
+{
+	width:20px;
+	border: solid 1px #cccccc;
+	cursor:pointer;
+}
+
+*html #pagenav a.pagenumb:hover
+{
+	width:20px;
+	border: solid 1px #244A94;
+	background-color:#D8DEEC;
+	cursor:pointer;
+	color:#FD9C02;
+}
+
+*html #pagenav a.pagenumb_now
+{
+	background-color:#EEEEEE;
+	width:20px;
+	border: solid 1px #cccccc;
+	cursor:pointer;
+	color:Red;
+	font-weight:bold;
+	font-size:13px;
+}
+
+*+html #pagenav a.pagenumb
+{
+	width:20px;
+	border: solid 1px #cccccc;
+	cursor:pointer;
+}
+
+*+html #pagenav a.pagenumb:hover
+{
+	width:20px;
+	border: solid 1px #244A94;
+	background-color:#D8DEEC;
+	cursor:pointer;
+	color:#FD9C02;
+}
+
+*+html #pagenav a.pagenumb_now
+{
+	background-color:#EEEEEE;
+	width:20px;
+	border: solid 1px #cccccc;
+	cursor:pointer;
+	color:Red;
+	font-weight:bold;
+	font-size:13px;
+}
+*/

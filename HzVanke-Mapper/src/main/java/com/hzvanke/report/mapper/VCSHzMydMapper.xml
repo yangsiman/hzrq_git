@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzvanke.report.dao.VCSHzMydDao">
+    <!-- 表Sys_User映射 -->
+    <resultMap type="com.hzvanke.report.pojo.VCSHzMyd" id="VCSHzMyd">
+        <id column="ID" property="id"/>
+        <result column="period_year" property="periodYear"/>
+        <result column="period_month" property="periodMonth"/>
+        <result column="area_id" property="areaId"/>
+        <result column="area_name" property="areaName"/>
+        <result column="company_id" property="companyId"/>
+        <result column="company_id" property="companyName"/>
+        <result column="revisit_type" property="revisitType"/>
+        <result column="eval_index" property="evalIndex"/>
+        <result column="df" property="df"/>
+        <result column="qty_zhs" property="qtyZhs"/>
+        <result column="qty_ybs" property="qtyYbs"/>
+        <result column="qy_ybs" property="qyYbs"/>
+        <result column="jt_ybs" property="jtYbs"/>
+        <result column="qy_zhs" property="qyZhs"/>
+        <result column="jt_zhs" property="jtZhs"/>
+        <result column="qy_ybs_waa" property="qyYbsWaa"/>
+        <result column="jt_ybs_waa" property="jtYbsWaa"/>
+        <result column="qydf" property="qydf"/>
+        <result column="jtdf" property="jtdf"/>
+        <result column="qy_ybs_zb" property="qyYbsZb"/>
+        <result column="jt_ybs_zb" property="jtYbsZb"/>
+        <result column="qty_ybs_waa" property="qtyYbsWaa"/>
+        <result column="qyjt_pm" property="qyjtPm"/>
+        <result column="qy_pm" property="qyPm"/>
+        <result column="jt_pm" property="jtPm"/>
+        <result column="ljdf" property="ljdf"/>
+        <result column="ljqty_zhs" property="ljqtyZhs"/>
+        <result column="ljqty_ybs" property="ljqtyYbs"/>
+        <result column="ljqy_ybs" property="ljqyYbs"/>
+        <result column="ljjt_ybs" property="ljjtYbs"/>
+        <result column="ljjt_zhs" property="ljjtZhs"/>
+        <result column="ljqy_ybs_waa" property="ljqyYbsWaa"/>
+        <result column="ljjt_ybs_waa" property="ljjtYbsWaa"/>
+        <result column="ljqydf" property="ljqydf"/>
+        <result column="ljjtdf" property="ljjtdf"/>
+        <result column="ljqy_ybs_zb" property="ljqyYbsZb"/>
+        <result column="ljjt_ybs_zb" property="ljjtYbsZb"/>
+        <result column="ljqty_ybs_waa" property="ljqtyYbsWaa"/>
+        <result column="ljqyjt_pm" property="ljqyjtPm"/>
+        <result column="ljqy_pm" property="ljqyPm"/>
+        <result column="ljjt_pm" property="ljjtPm"/>
+        <result column="gssl" property="gssl"/>
+        <result column="qxqy" property="qxqy"/>
+        <result column="qxgs" property="qxgs"/>
+        <result column="createTime" property="createTime"/>
+    </resultMap>
+
+
+    <select id="findById" resultMap="VCSHzMyd">
+        select * from v_cs_hz_myd_copy where id=#{id}
+    </select>
+
+    <select id="findObjectList" resultMap="VCSHzMyd">
+        select * from v_cs_hz_myd_copy where ${key}=#{value}
+    </select>
+
+
+    <select id="findCopyList" resultMap="VCSHzMyd">
+        select * from v_cs_hz_myd where project_id not in(select project_id from project)
+    </select>
+
+
+    <select id="getPupoList" resultType="java.util.Map">
+        SELECT
+            round(IFNULL( sum( ljdf ), 0 )/ count( * ),2) AS ljdf,
+            round(IFNULL( sum( ljqty_ybs ), 0 )/ count( * ),2) AS ljqty_ybs,
+            round(IFNULL( sum( ljjt_pm ), 0 )/ count( * ),2) AS ljjt_pm,
+            period_month,
+            count( * ) AS count
+        FROM
+            v_cs_hz_myd
+            <where>
+                <if test="date!=null">createTime > date_sub(#{date}, interval 7 day)</if>
+            </where>
+        GROUP BY
+            period_month
+    </select>
+
+    <select id="findList" resultMap="VCSHzMyd">
+        select * from v_cs_hz_myd_copy
+    </select>
+
+
+    <insert id="add" parameterType="com.hzvanke.report.pojo.VCSHzMyd">
+    insert into v_cs_hz_myd_copy (
+    id,period_year,period_month,area_id,area_name,company_id,company_name,revisit_type,eval_index,df,
+    qty_zhs,qty_ybs,qy_ybs,jt_ybs,qy_zhs,jt_zhs,qy_ybs_waa,jt_ybs_waa,qydf,jtdf,qy_ybs_zb,jt_ybs_zb,
+    qty_ybs_waa,qyjt_pm,qy_pm,jt_pm,ljdf,ljqty_zhs,ljqty_ybs,ljqy_ybs,ljjt_ybs,ljjt_zhs,ljqy_ybs_waa,
+    ljjt_ybs_waa,ljqydf,ljjtdf,ljqy_ybs_zb,ljjt_ybs_zb,ljqty_ybs_waa,ljqyjt_pm,ljqy_pm,ljjt_pm,gssl,
+    qxqy,qxgs,createTime
+    )
+     values (
+        #{id},#{periodYear},#{periodMonth},#{areaId},#{areaName},#{companyId},#{companyName},#{revisitType},#{evalIndex},#{df},
+        #{qtyZhs},#{qtyYbs},#{qyYbs},#{jtYbs},#{qyZhs},#{jtZhs},#{qyYbsWaa},#{jtYbsWaa},#{qydf},#{jtdf}
+        ,#{qyYbsZb},#{jtYbsZb},#{qtyYbsWaa},#{qyjtPm},#{qyPm},#{jtPm},#{ljdf},#{ljqtyZhs},#{ljqtyYbs},#{ljqyYbs}
+        ,#{ljjtYbs},#{ljjtZhs},#{ljqyYbsWaa},#{ljjtYbsWaa},#{ljqydf},#{ljjtdf},#{ljqyYbsZb},#{ljjtYbsZb},#{ljqtyYbsWaa},#{ljqyjtPm}
+        ,#{ljqyPm},#{ljjtPm},#{gssl},#{qxqy},#{qxgs}, #{createTime})
+    </insert>
+
+    <!--
+        功能说明：修改记录
+        参数说明：实体类
+        作者：莫宁辉，开发时间：2019-08-23，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <update id="update" parameterType="com.hzvanke.report.pojo.VCSHzMyd">
+        update v_cs_hz_myd_copy
+        <set>
+            <if test="periodYear!=null and periodYear!=''">period_year=#{periodYear},</if>
+            <if test="periodMonth!=null and periodMonth!=''">period_month=#{periodMonth},</if>
+            <if test="areaId!=null and areaId!=''">area_id=#{areaId},</if>
+            <if test="areaName!=null and areaName!=''">area_name=#{areaName},</if>
+            <if test="companyId!=null and companyId!=''">company_id=#{companyId},</if>
+            <if test="companyName!=null and companyName!=''">companyName=#{companyName},</if>
+            <if test="revisitType!=null and revisitType!=''">revisit_type=#{revisitType},</if>
+            <if test="evalIndex!=null and evalIndex!=''">eval_index=#{evalIndex},</if>
+            <if test="df!=null ">df=#{df},</if>
+            <if test="qtyZhs!=null ">revisit_type=#{qtyZhs},</if>
+            <if test="revisitType!=null">qty_zhs=#{revisitType},</if>
+            <if test="qtyYbs!=null">qty_ybs=#{qtyYbs},</if>
+            <if test="qyYbs!=null">qy_ybs=#{qyYbs},</if>
+            <if test="jtYbs!=null">jt_ybs=#{jtYbs},</if>
+            <if test="qyZhs!=null">qy_zhs=#{qyZhs},</if>
+            <if test="jtZhs!=null">jt_zhs=#{jtZhs},</if>
+            <if test="qyYbsWaa!=null">qy_ybs_waa=#{qyYbsWaa},</if>
+            <if test="jtYbsWaa!=null">jt_ybs_waa=#{jtYbsWaa},</if>
+            <if test="qydf!=null">qydf=#{qydf},</if>
+            <if test="jtdf!=null">jtdf=#{jtdf},</if>
+            <if test="qyYbsZb!=null">qy_ybs_zb=#{qyYbsZb},</if>
+            <if test="jtYbsZb!=null">jt_ybs_zb=#{jtYbsZb},</if>
+            <if test="qtyYbsWaa!=null">qty_ybs_waa=#{qtyYbsWaa},</if>
+            <if test="qyjtPm!=null">qyjt_pm=#{qyjtPm},</if>
+            <if test="qyPm!=null">qy_pm=#{qyPm},</if>
+            <if test="jtPm!=null">jt_pm=#{jtPm},</if>
+            <if test="ljdf!=null">ljdf=#{ljdf},</if>
+            <if test="ljqtyZhs!=null">ljqty_zhs=#{ljqtyZhs},</if>
+            <if test="ljqtyYbs!=null">ljqty_ybs=#{ljqtyYbs},</if>
+            <if test="ljqyYbs!=null">ljqy_ybs=#{ljqyYbs},</if>
+            <if test="ljjtYbs!=null">ljjt_ybs=#{ljjtYbs},</if>
+            <if test="ljjtZhs!=null">ljjt_zhs=#{ljjtZhs},</if>
+            <if test="ljqyYbsWaa!=null">ljqy_ybs_waa=#{ljqyYbsWaa},</if>
+            <if test="ljjtYbsWaa!=null">ljjt_ybs_waa=#{ljjtYbsWaa},</if>
+            <if test="ljqydf!=null">ljqydf=#{ljqydf},</if>
+            <if test="ljjtdf!=null">ljjtdf=#{ljjtdf},</if>
+            <if test="ljqyYbsZb!=null">ljqy_ybs_zb=#{ljqyYbsZb},</if>
+            <if test="ljjtYbsZb!=null">ljjt_ybs_zb=#{ljjtYbsZb},</if>
+            <if test="ljqtyYbsWaa!=null">ljqty_ybs_waa=#{ljqtyYbsWaa},</if>
+            <if test="ljqyjtPm!=null">ljqyjt_pm=#{ljqyjtPm},</if>
+            <if test="ljqyPm!=null">ljqy_pm=#{ljqyPm},</if>
+            <if test="ljjtPm!=null">ljjt_pm=#{ljjtPm},</if>
+            <if test="gssl!=null">gssl=#{gssl},</if>
+            <if test="qxqy!=null and qxqy!=''">qxqy=#{qxqy},</if>
+            <if test="qxgs!=null and qxgs!=''">qxgs=#{qxgs},</if>
+            <if test="createTime!=null">createTime=#{createTime}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!--
+        功能说明：根据主键ID集合批量删除
+        参数说明：listKeyid：主键ID集合
+        作者：莫宁辉，开发时间：2019-08-23，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <delete id="delete" parameterType="java.util.List">
+        delete from v_cs_hz_myd_copy
+        where id in
+        <foreach collection="listKeyid" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,245 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set value="${pageContext.request.contextPath}" var="path" scope="page"/>
+<link href="${path}/SystemCss/Default/base_pagenavigation.css" type="text/css" rel="stylesheet"/>
+<link href="${path}/SystemCss/Default/hzrq_base_icon.css" type="text/css" rel="stylesheet"/>
+<link href="${path}/SystemCss/Default/hzrq_base_list.css" type="text/css" rel="stylesheet"/>
+<link href="${path}/SystemCss/Default/hzrq_base_style.css?12" type="text/css" rel="stylesheet"/>
+<link href="${path}/SystemCss/redio_css.css" type="text/css" rel="stylesheet"/>
+<link href="${path}/SystemCss/Default/index.css" type="text/css" rel="stylesheet"/>
+<link rel="stylesheet" href="${path}/SystemJs/layer/css/layui.css" type="text/css"  media="all">
+<link rel="stylesheet" href="${path}/SystemCss/reset.css" type="text/css" >
+
+<script type="text/javascript" src="${path}/SystemJs/Echarts/echarts.min.js"></script>
+<script type="text/javascript" src="${path}/SystemJs/jquery.v3.3.1.min.js"></script>
+<script type="text/javascript" src="${path}/SystemJs/jquery.form.js"></script>
+<script type="text/javascript" src="${path}/SystemJs/newCommon.js"></script>
+<script type="text/javascript" src="${path}/SystemJs/layer/layer.js"></script>
+<script type="text/javascript" src="${path}/SystemJs/layer/layui.js"></script>
+<script type="text/javascript" src="${path}/SystemJs/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="${path}/SystemJs/xm-select.js"></script>
+<script>
+
+
+    (function() {
+        if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+            handleFontSize();
+        } else {
+            if (document.addEventListener) {
+                document.addEventListener("WeixinJSBridgeReady", handleFontSize, false);
+            } else if (document.attachEvent) {
+                document.attachEvent("WeixinJSBridgeReady", handleFontSize);
+                document.attachEvent("onWeixinJSBridgeReady", handleFontSize);
+            }
+        }
+
+        function handleFontSize() {
+            // 设置网页字体为默认大小
+            WeixinJSBridge.invoke('setFontSizeCallback', { 'fontSize' : 0 });
+            // 重写设置网页字体大小的事件
+            WeixinJSBridge.on('menu:setfont', function() {
+                WeixinJSBridge.invoke('setFontSizeCallback', { 'fontSize' : 0 });
+            });
+        }
+    })();
+    //禁止浏览器字体修改对系统的影响
+    $(function () {
+        $("input").blur(function () {
+            $("html,body").animate({scrollTop: document.documentElement.clientHeight}, 500);
+        });
+    });
+
+    //获取滚动条当前的位置
+    function getScrollTop() {
+        var scrollTop = 0;
+        if (document.documentElement && document.documentElement.scrollTop) {
+            scrollTop = document.documentElement.scrollTop;
+        } else if (document.body) {
+            scrollTop = document.body.scrollTop;
+        }
+        return scrollTop;
+    }
+
+    //获取当前可是范围的高度
+    function getClientHeight() {
+        var clientHeight = 0;
+        if (document.body.clientHeight && document.documentElement.clientHeight) {
+            clientHeight = Math.min(document.body.clientHeight, document.documentElement.clientHeight);
+        } else {
+            clientHeight = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
+        }
+        return clientHeight;
+    }
+
+    //获取文档完整的高度
+    function getScrollHeight() {
+        return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    }
+    function getWidth() {
+        return  document.documentElement.clientWidth;
+    }
+
+
+    /**
+     * 验证是否有选择二级菜单
+     * @param msg 操作提示
+     * @returns {boolean}
+     */
+    function fExistSelect(msg) {
+        if (newCommon.pfValidDel("cboxSelectAll")) {
+            if (confirm(msg)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            alert("你未选择数据，不能执行此操作。");
+            return false;
+        }
+    }
+
+    /**
+     * 切换页卡
+     * @param index
+     */
+    function fChangeTab(index) {
+        $("div[id^='tab_content_']").hide();
+        $("div[id^='tab_button_']").hide();
+        $("div[id^='tab_item_']").removeClass("rq_tab_item_focus_2");
+        var _tab_item = "tab_item_" + index.toString();
+        var _tab_content = "tab_content_" + index.toString();
+        var _tab_button="tab_button_"+index.toString();
+        $("#" + _tab_item).addClass("rq_tab_item_focus_2");
+        $("#" + _tab_content).show();
+        $("#" + _tab_button).show();
+
+    }
+
+    /**
+     * 使得输入框只能输入数字，两位小数
+     * @param obj
+     */
+    function checkNum(obj) {
+        obj.value = obj.value.replace(/[^\d.]/g, ""); //清除"数字"和"."以外的字符
+        obj.value = obj.value.replace(/^\./g, ""); //验证第一个字符是数字
+        obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个, 清除多余的
+        obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //控制可输入的小数
+
+    }
+
+    function checkNumInt(obj) {
+        obj.value = obj.value.replace(/[^\d]/g, ""); //清除"数字"和"."以外的字符
+        obj.value = obj.value.replace(/^\./g, ""); //验证第一个字符是数字
+
+    }
+
+    function closeSelf() {
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        parent.layer.close(index); //再执行关闭
+    }
+
+    function chengName() {
+        $("#typeName").val($("#typeId option:selected").text());
+    }
+
+    function goodsNext(id,action) {
+        layer.confirm("是否确认当前页面规格类型相关信息填写完整？多类型商品需要点击清单查看相关信息", function () {
+            location.href = " ${path}/MallGoods/"+action+"?goodsId="+id+"&goodId="+id;
+        });
+    }
+
+
+
+
+    var center = "";
+
+    function che(id, type, name) {
+        if (type == '0') {
+            layer.prompt({
+                formType: 0,
+                title: '请输入驳回原因'
+            }, function (value, index) {
+                center = value;
+                ssStatus(id, type, name);
+            });
+        }
+    }
+
+
+</script>
+
+<style>
+    .left {
+        width: 5px;
+        height: 5px;
+        border: solid black;
+        border-width: 0 1px 1px 0;
+        display: inline-block;
+        padding: 3px;
+        margin: 10px 0 0 10px;
+        transform: rotate(135deg);
+        -webkit-transform: rotate(135deg);
+    }
+</style>
+
+<style>
+
+    .title{
+        height: 40px;
+        position: relative;
+    }
+
+    .wrapper1 {
+        margin-top: 16px;
+        background-color: white;
+    }
+
+    .wrapper-chart{
+        width: 100%;
+        height: 500px;
+    }
+
+    .chart-top{
+        margin-top: 20px;
+        text-align: center;
+    }
+    .chart-top>input{
+        border: none;
+    }
+    .chart-top>input:not(.active):hover{
+        background-color: rgba(11,152,213,.2);
+    }
+
+
+    .chart{
+        margin: 20px 20px 0;
+        height: 400px;
+        overflow-y: auto;
+    }
+
+    .main{
+        height: 100%;
+        width: 100%;
+    }
+
+    .active{
+        background-color: #1e4eff !important;
+        color: white !important;
+    }
+
+    .layui-btn-normal {
+        background-color: white;
+        color: #1E9FFF;
+        border-color: #1E9FFF;
+    }
+    .layui-btn:hover {
+        opacity: .8;
+        filter: alpha(opacity=80);
+        color: #1E9FFF;
+    }
+
+</style>

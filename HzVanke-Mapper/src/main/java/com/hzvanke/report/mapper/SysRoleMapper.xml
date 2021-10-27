@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzvanke.report.dao.SysRoleDao">
+  <resultMap type="com.hzvanke.report.pojo.SysRole" id="SysRoleMapper">
+    <id column="ID" property="id" />
+    <result column="RoleCode" property="roleCode" />
+    <result column="RoleName" property="roleName" />
+    <result column="Description" property="description" />
+    <result column="Sort" property="sort" />
+  </resultMap>
+
+    <!--
+        功能说明：获取所有角色信息
+        作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <select id="findAll" resultMap="SysRoleMapper">
+		select *
+		 from sys_role
+		 <if test="value!=null and value !=''">
+             where  rolename !='系统管理员'
+         </if>
+		 order by sort
+	</select>
+
+    <!--
+        功能说明：根据ID获取一条记录
+        参数说明：id：主键ID
+        作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <select id="findById" resultMap="SysRoleMapper">
+		select *
+		 from sys_role where id=#{id}
+	</select>
+
+    <!--
+        功能说明：根据code获取一条记录
+        参数说明：rolecode：角色编号
+        作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <select id="findByCode" resultMap="SysRoleMapper">
+		select *
+		 from sys_role where rolecode=#{roleCode}
+	</select>
+
+    <!--
+          功能说明：新增数据
+          参数说明：实体类
+          作者：莫宁辉，开发时间：2019-08-26，版本号：1.1
+          最后编辑：，编辑时间：，版本号：
+       -->
+    <insert id="add" parameterType="com.hzvanke.report.pojo.SysRole">
+        insert into sys_role (id,rolecode,rolename,description,sort) values (#{id},#{roleCode},#{roleName},#{description},#{sort})
+    </insert>
+
+    <!--
+          功能说明：修改一条数据
+          参数说明：实体类
+          作者：莫宁辉，开发时间：2019-08-26，版本号：1.1
+          最后编辑：，编辑时间：，版本号：
+       -->
+    <update id="update" parameterType="com.hzvanke.report.pojo.SysRole">
+        update sys_role
+        <set>
+            <if test="roleCode!=null and roleCode!=''">
+                rolecode=#{roleCode},
+            </if>
+            <if test="roleName!=null and roleName!=''">
+                rolename=#{roleName},
+            </if>
+            <if test="description!=null and description!=''">
+                description=#{description},
+            </if>
+            <if test="sort!=null and sort!=''">
+                sort=#{sort}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!--
+          功能说明：删除一条数据
+          参数说明：主键id
+          作者：莫宁辉，开发时间：2019-08-26，版本号：1.1
+          最后编辑：，编辑时间：，版本号：
+       -->
+    <delete id="delete">
+        delete from sys_role where id=#{id}
+    </delete>
+
+    <!--
+          功能说明：获取最大排序号
+          作者：莫宁辉，开发时间：2019-08-26，版本号：1.1
+          最后编辑：，编辑时间：，版本号：
+       -->
+    <select id="findMaxSort" resultType="int">
+        select IFNULL(MAX(sort),0) from sys_role
+    </select>
+
+    <!--
+          功能说明：获取最大排序号
+          作者：莫宁辉，开发时间：2019-05-20，版本号：1.1
+          最后编辑：，编辑时间：，版本号：
+       -->
+    <select id="findByName" resultMap="SysRoleMapper">
+        select * from sys_role where RoleName=#{roleName}
+    </select>
+</mapper>

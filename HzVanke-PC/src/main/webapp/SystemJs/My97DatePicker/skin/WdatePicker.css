@@ -1,0 +1,16 @@
+.Wdate{
+	/*border:#999 1px solid;*/
+	background:#fff url(datePicker.gif) no-repeat right;
+}
+
+.date-info-start {
+	BACKGROUND: url(date_start.png) no-repeat right center; 
+}
+.date-info-end {
+	BACKGROUND: url(date_end.png) no-repeat right center;
+}
+
+.WdateFmtErr{
+	font-weight:bold;
+	color:red;
+}

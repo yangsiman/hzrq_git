@@ -1,0 +1,71 @@
+﻿/* 系统信息 */
+.rq_icon_systeminfo {
+    background-image: url("hzrq_images/hzrq_icon_systeminfo.png");
+    background-position: left 5px center;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+}
+
+/* 全局 */
+.rq_icon_global {
+    background-image: url("hzrq_images/hzrq_icon_global.png");
+    background-position: left 5px center;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+}
+
+/* 刷新 */
+.rq_icon_refresh {
+    background-image: url("hzrq_images/hzrq_icon_refresh.png");
+    background-position: left 5px center;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+}
+
+/* 离开 */
+.rq_icon_exit {
+    background-image: url("hzrq_images/hzrq_icon_exit.png");
+    background-position: left 5px center;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+}
+
+/*用户*/
+.rq_icon_user {
+    background-image: url("hzrq_images/hzrq_icon_user.png");
+    background-position: left 5px center;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+}
+
+/*列表*/
+.rq_icon_list {
+    background-image: url("hzrq_images/hzrq_icon_list.png");
+    background-position: left 5px center;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+}
+
+/*新增*/
+.rq_icon_new {
+    background-image: url("hzrq_images/hzrq_icon_new.png");
+    background-position: left 5px center;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+}
+
+/*修改*/
+.rq_icon_edit {
+    background-image: url("hzrq_images/hzrq_icon_edit.png");
+    background-position: left 5px center;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+}
+
+/*删除*/
+.rq_icon_del {
+    background-image: url("hzrq_images/hzrq_icon_del.png");
+    background-position: left 5px center;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+}

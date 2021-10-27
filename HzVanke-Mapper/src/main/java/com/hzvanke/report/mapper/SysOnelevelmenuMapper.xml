@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzvanke.report.dao.SysOnelevelmenuDao">
+    <resultMap id="SysOnelevelmenuMapper" type="com.hzvanke.report.pojo.SysOnelevelmenu">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="MenuName" property="menuname" jdbcType="VARCHAR"/>
+        <result column="ManageName" property="managename" jdbcType="VARCHAR"/>
+        <result column="Sort" property="sort" jdbcType="INTEGER"/>
+        <result column="ClassName" property="classname" jdbcType="VARCHAR"/>
+        <result column="Status" property="status" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--
+          功能说明：获取所有一级菜单信息
+          作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+          最后编辑：，编辑时间：，版本号：
+       -->
+    <select id="findAll" resultMap="SysOnelevelmenuMapper">
+    select * from sys_onelevelmenu order by sort
+    </select>
+
+    <!--
+          功能说明：根据ID获取一条信息
+          参数说明：id：主键ID
+          作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+          最后编辑：，编辑时间：，版本号：
+       -->
+    <select id="findById" resultMap="SysOnelevelmenuMapper">
+    select * from sys_onelevelmenu where id=#{id}
+    </select>
+
+    <!--
+          功能说明：新增数据
+          参数说明：实体类
+          作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+          最后编辑：，编辑时间：，版本号：
+       -->
+    <insert id="add" parameterType="com.hzvanke.report.pojo.SysOnelevelmenu">
+    insert into sys_onelevelmenu (id,menuname,managename,sort,classname,status)
+     values (#{id},#{menuname},#{managename},#{sort},#{classname},#{status})
+    </insert>
+
+    <!--
+          功能说明：修改数据
+          参数说明：实体类
+          作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+          最后编辑：，编辑时间：，版本号：
+       -->
+    <update id="update" parameterType="com.hzvanke.report.pojo.SysOnelevelmenu">
+    update sys_onelevelmenu set
+        <if test="menuname!=null and menuname!=''">
+            menuname=#{menuname},
+        </if>
+        <if test="managename!=null and managename!=''">
+            managename=#{managename},
+        </if>
+        <if test="sort!=null and sort!=''">
+            sort=#{sort},
+        </if>
+        <if test="classname!=null and classname!=''">
+            classname=#{classname},
+        </if>
+        <if test="status!=null and status!=''">
+            status=#{status}
+        </if>
+    where id=#{id}
+    </update>
+
+    <!--
+          功能说明：根据ID删除一条记录
+          参数说明：id：主键ID
+          作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+          最后编辑：，编辑时间：，版本号：
+       -->
+    <delete id="del">
+        delete from sys_onelevelmenu where id=#{id}
+    </delete>
+
+    <!--
+          功能说明：获取最大排序号
+          作者：莫宁辉，开发时间：2019-08-20，版本号：1.1
+          最后编辑：，编辑时间：，版本号：
+       -->
+    <select id="findMaxSort" resultType="int">
+      select IFNULL(MAX(sort),0) from sys_onelevelmenu
+    </select>
+</mapper>

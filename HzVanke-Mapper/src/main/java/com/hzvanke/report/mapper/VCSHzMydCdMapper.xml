@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzvanke.report.dao.VCSHzMydCdDao">
+    <!-- 表Sys_User映射 -->
+    <resultMap type="com.hzvanke.report.pojo.VCSHzMydCd" id="VCSHzMydCdMapper">
+        <id column="id" property="id"/>
+        <result column="period_year" property="periodYear"/>
+        <result column="period_month" property="periodMonth"/>
+        <result column="area_id" property="areaId"/>
+        <result column="area_name" property="areaName"/>
+        <result column="company_id" property="companyId"/>
+        <result column="company_name" property="companyName"/>
+        <result column="city_id" property="cityId"/>
+        <result column="city_name" property="cityName"/>
+        <result column="project_id" property="projectId"/>
+        <result column="project_name" property="projectName"/>
+        <result column="stage_id" property="stageId"/>
+        <result column="stage_name" property="stageName"/>
+        <result column="revisit_type" property="revisitType"/>
+        <result column="eval_index" property="evalIndex"/>
+        <result column="eval_index" property="qtyZhs"/>
+        <result column="qty_ybs" property="qtyYbs"/>
+        <result column="qty_mys" property="qtyMys"/>
+        <result column="createTime" property="createTime"/>
+
+    </resultMap>
+
+
+    <select id="findById" resultMap="VCSHzMydCdMapper">
+        select * from v_cs_hz_myd_cd_copy where id=#{id}
+    </select>
+
+    <select id="findObjectList" resultMap="VCSHzMydCdMapper">
+        select * from v_cs_hz_myd_cd_copy where ${key}=#{value}
+    </select>
+
+    <!--
+        功能说明：根据条件获取对应的用户数据（用户管理页使用，实现分页）返回view_sysuser_role视图与findCountByManage配合使用
+        参数说明：sysUserSearch：查询实体类
+        作者：莫宁辉，开发时间：2019-08-23，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <select id="findList" resultMap="VCSHzMydCdMapper" >
+        select * from v_cs_hz_myd_cd_copy
+        order by createTime desc
+    </select>
+
+    <select id="findCopyList" resultMap="VCSHzMydCdMapper" >
+        select * from v_cs_hz_myd_cd
+        order by createTime desc
+    </select>
+
+
+    <!--
+        功能说明：新增记录
+        参数说明：实体类
+        作者：莫宁辉，开发时间：2019-08-23，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <insert id="add" parameterType="com.hzvanke.report.pojo.VCSHzMydCd">
+    insert into v_cs_hz_myd_cd_copy (
+    id,period_year,period_month,area_id,area_name,company_id,company_name,city_id,
+    city_name,project_id,project_name,stage_id,stage_name,revisit_type,eval_index,
+    qty_zhs,qty_ybs,qty_mys,createTime
+    )
+     values (
+        #{id},#{periodYear},#{periodMonth},#{areaId},#{areaName},#{companyId},#{companyName},#{cityId},#{cityName},#{projectId},
+        #{projectName},#{stageId},#{stageName},#{revisitType},#{evalIndex},#{qtyZhs},#{qtyYbs},#{qtyMys}
+        )
+    </insert>
+
+    <!--
+        功能说明：修改记录
+        参数说明：实体类
+        作者：莫宁辉，开发时间：2019-08-23，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <update id="update" parameterType="com.hzvanke.report.pojo.VCSHzMydCd">
+        update v_cs_hz_myd_cd_copy
+        <set>
+            <if test="periodYear!=null and periodYear!=''">period_year=#{periodYear},</if>
+            <if test="periodMonth!=null and periodMonth!=''">period_month=#{periodMonth},</if>
+            <if test="areaId!=null and areaId!=''">area_id=#{areaId},</if>
+            <if test="areaName!=null and areaName!=''">area_name=#{areaName},</if>
+            <if test="companyId!=null and companyId!=''">company_id=#{companyId},</if>
+            <if test="companyName!=null and companyName!=''">companyName=#{companyName},</if>
+            <if test="cityId!=null and cityId!=''">city_id=#{cityId},</if>
+            <if test="cityName!=null and cityName !='' ">city_name=#{cityName},</if>
+            <if test="projectId!=null and projectId !='' ">project_id=#{projectId},</if>
+            <if test="projectName!=null and projectName !='' ">project_name=#{projectName},</if>
+            <if test="stageId!=null and stageId !='' ">stage_id=#{stageId</if>
+            <if test="stageName!=null and stageName !='' ">stage_name=#{stageName},</if>
+            <if test="revisitType!=null and revisitType !='' ">revisit_type=#{revisitType},</if>
+            <if test="evalIndex!=null and evalIndex !='' ">eval_index=#{evalIndex},</if>
+            <if test="qtyZhs!=null ">qty_zhs=#{qtyZhs},</if>
+            <if test="qtyYbs!=null ">qty_mys=#{qtyYbs},</if>
+            <if test="qtyMys!=null ">qty_zhs=#{qtyMys},</if>
+            <if test="createTime!=null and createTime !='' ">createTime=#{createTime}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!--
+        功能说明：根据主键ID集合批量删除
+        参数说明：listKeyid：主键ID集合
+        作者：莫宁辉，开发时间：2019-08-23，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <delete id="delete" parameterType="java.util.List">
+        delete from v_cs_hz_myd_cd_copy
+        where id in
+        <foreach collection="listKeyid" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

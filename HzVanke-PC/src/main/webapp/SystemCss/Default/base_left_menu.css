@@ -1,0 +1,359 @@
+﻿/* 系统页左菜单/start */
+#rq_left_menu {
+    padding: 0px 0px;
+    color: #fff;
+}
+
+    #rq_left_menu .rq_left_menu_title_box {
+        display: flex;
+        padding-left: 40px;
+    }
+
+        #rq_left_menu .rq_left_menu_title_box:hover {
+            background-color: #009688; /*009688   阿里00c1de*/
+        }
+
+        #rq_left_menu .rq_left_menu_title_box .rq_left_menu_title {
+            height: 40px;
+            flex: 1;
+        }
+
+        #rq_left_menu .rq_left_menu_title_box .rq_left_menu_direction_up {
+            height: 40px;
+            width: 40px;
+            background-repeat: no-repeat;
+            background-position: left center;
+            background-image: url('hzrq_images/hzrq_icon_arrow_up.png');
+        }
+
+        #rq_left_menu .rq_left_menu_title_box .rq_left_menu_direction_down {
+            height: 40px;
+            width: 40px;
+            background-repeat: no-repeat;
+            background-position: left center;
+            background-image: url('hzrq_images/hzrq_icon_arrow_down.png');
+        }
+
+    #rq_left_menu .rq_left_menu_content {
+        height: auto;
+        background-color: #333744;
+        overflow-y:auto;
+    }
+
+    #rq_left_menu > li {
+        background-color: #42485b;
+        line-height: 40px;
+        height: 40px;
+        cursor: pointer;
+    }
+
+        #rq_left_menu > li > a {
+            line-height: 40px;
+            padding-left: 38px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: normal;
+            display: block;
+            text-decoration: none;
+            color: #fff;
+        }
+
+            #rq_left_menu > li > a:hover {
+                background-color: #4a5064;
+                /*background-color: #b4c5e1;*/
+            }
+/* 系统页左菜单/end */
+
+
+
+
+/* 公有菜单样式---导入 */
+.icon_left_menu_public_import {
+    background-image: url('project_images/icon_menu_public_import.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    
+}
+
+.icon_left_menu_public_data {
+    background-image: url('project_images/icon_menu_public_data.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    
+}
+
+.icon_left_menu_public_search {
+    background-image: url('project_images/icon_menu_public_search.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    
+}
+
+.icon_left_menu_public_tel{
+    background-image: url('project_images/icon_menu_public_tel.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size:15px 15px;
+}
+
+.icon_left_menu_public_visit {
+    background-image: url('project_images/icon_menu_public_visit.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 15px 15px;
+}
+
+.icon_left_menu_public_sign {
+    background-image: url('project_images/icon_menu_public_sign.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 15px 15px;
+}
+/* 公有菜单样式---导入 */
+
+
+/* 系统配置 */
+.icon_left_menu_config {
+    background: url('project_images/icon_menu_config.png') no-repeat 10px center;
+}
+
+.icon_left_menu_config_user {
+    background : url('project_images/icon_menu_config_user.png') no-repeat 10px center;
+}
+
+.icon_left_menu_config_role {
+    background : url('project_images/icon_menu_config_role.png') no-repeat 10px center;
+}
+
+.icon_left_menu_config_dictionary {
+    background: url('project_images/icon_menu_config_dictionary.png') no-repeat 10px center;
+}
+
+.icon_left_menu_area {
+    background: url('project_images/area.png')no-repeat 10px center;
+}
+
+.icon_left_menu_config_menu {
+    background : url('project_images/icon_menu_config_menu.png')no-repeat 10px center;
+}
+
+/* 系统配置 */
+
+/* 基础数据 */
+.icon_left_menu_basedata {
+    background : url('project_images/icon_menu_basedata.png')no-repeat 10px center;
+}
+
+
+.icon_left_menu_basedata_project {
+    background: url('project_images/icon_menu_basedata_project.png')no-repeat 10px center;
+
+}
+
+.icon_left_menu_basedata_signuserinfo {
+    background-image: url('project_images/icon_menu_basedata_signuserinfo.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+
+.icon_left_menu_basedata_bank {
+    background-image: url('project_images/icon_menu_basedata_bank.png');
+    background-repeat: no-repeat;
+    background-position: 7px center;
+    background-size: 20px 20px;
+}
+
+.icon_left_menu_basedata_saleteam {
+    background-image: url('project_images/icon_menu_basedata_saleteam.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+
+.icon_left_menu_basedata_agentcompany {
+    background-image: url('project_images/icon_menu_basedata_agentcompany.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+
+/* 按揭处理 */
+.icon_left_menu_aj_signconfirm {
+    background-image: url('project_images/icon_menu_aj_signconfirm.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+
+.icon_left_menu_aj {
+    background-image: url('project_images/icon_menu_aj.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+.icon_left_menu_aj_send {
+    background-image: url('project_images/icon_menu_aj_send.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+.icon_left_menu_aj_bankconfirm {
+    background-image: url('project_images/icon_menu_aj_bankconfirm.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+.icon_left_menu_aj_bankok {
+    background-image: url('project_images/icon_menu_aj_bankok.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+.icon_left_menu_aj_agent {
+    background-image: url('project_images/icon_menu_aj_agent.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+/* 按揭处理 */
+
+
+/* 预约签约 */
+.icon_left_menu_beforesign {
+    background-image: url('project_images/icon_menu_beforesign.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size:16px 16px;
+}
+
+.icon_left_menu_beforesign_start {
+    background-image: url('project_images/icon_menu_beforesign_start.png');
+    background-repeat: no-repeat;
+    background-position: 12px center;
+    background-size: 16px 16px;
+}
+
+.icon_left_menu_beforesign_list {
+    background-image: url('project_images/icon_menu_beforesign_list.png');
+    background-repeat: no-repeat;
+    background-position: 12px center;
+    background-size: 16px 16px;
+}
+
+.icon_left_menu_beforesign_sa_start {
+    background-image: url('project_images/icon_menu_beforesign_sa_start.png');
+    background-repeat: no-repeat;
+    background-position: 12px center;
+    background-size: 14px 14px;
+}
+
+.icon_left_menu_beforesign_sa_list {
+    background-image: url('project_images/icon_menu_beforesign_sa_list.png');
+    background-repeat: no-repeat;
+    background-position: 12px center;
+    background-size: 14px 14px;
+}
+
+.icon_left_menu_beforesign_confirm {
+    background-image: url('project_images/icon_menu_beforesign_confirm.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+
+.icon_left_menu_beforesign_takeno {
+    background-image: url('project_images/icon_menu_beforesign_takeno.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+
+.icon_left_menu_beforesign_casebagfiling {
+    background-image: url('project_images/icon_menu_beforesign_casebagfiling.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+
+.icon_left_menu_beforesign_casebagreceive {
+    background-image: url('project_images/icon_menu_beforesign_casebagreceive.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+
+.icon_left_menu_beforesign_qrcode {
+    background-image: url('project_images/icon_menu_beforesign_qrcode.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+/* 预约签约 */
+
+
+/* 客户信息 */
+.icon_left_menu_customer {
+    background-image: url('project_images/icon_menu_customer.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+
+.icon_left_menu_customer_myprojectcustom {
+    background-image: url('project_images/icon_menu_customer_myprojectcustom.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+/* 客户信息 */
+
+
+/* 报表中心 */
+.icon_left_menu_report {
+    background-image: url('project_images/icon_menu_report.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+
+.icon_left_menu_report_zh {
+    background-image: url('project_images/icon_left_menu_report_zh.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+
+.icon_left_menu_report_zhsb {
+    background-image: url('project_images/icon_left_menu_report_zhsb.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 18px 18px;
+}
+
+.icon_left_menu_report_type {
+    background-image: url('project_images/icon_left_menu_report_type.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+
+.icon_left_menu_report_number {
+    background-image: url('project_images/icon_left_menu_report_number.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+
+.icon_left_menu_report_zgl {
+    background-image: url('project_images/icon_left_menu_report_zgl.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px 16px;
+}
+/* 报表中心 */
+
+
+
+
+

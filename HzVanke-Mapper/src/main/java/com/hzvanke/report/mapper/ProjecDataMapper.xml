@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzvanke.report.dao.ProjectDataDao">
+    <resultMap type="com.hzvanke.report.pojo.ProjectData" id="ProjectDataMapper">
+        <id column="id" property="id"/>
+        <result column="projectId" property="projectId"/>
+        <result column="ljdf" property="ljdf"/>
+        <result column="ljpm" property="ljpm"/>
+        <result column="ljqtyYbs" property="ljqtyYbs"/>
+        <result column="revisitType" property="revisitType"/>
+        <result column="bmys" property="bmys"/>
+        <result column="createTime" property="createTime"/>
+
+    </resultMap>
+
+
+    <select id="findById" resultMap="ProjectDataMapper">
+        select * from project_data where id=#{id}
+    </select>
+
+    <select id="findObjectList" resultMap="ProjectDataMapper">
+        select * from project_data where ${key}=#{value}
+    </select>
+
+
+    <select id="findList" resultMap="ProjectDataMapper" >
+        select * from project_data
+        order by createTime desc
+    </select>
+
+
+    <insert id="add" parameterType="com.hzvanke.report.pojo.Company">
+    insert into project_data (id,projectId,ljdf,ljpm,ljqtyYbs,revisitType,bmys,createTime)
+     values (
+        #{id},#{projectId},#{ljdf},#{ljpm},#{ljqtyYbs},#{revisitType},#{bmys},#{createTime}
+        )
+    </insert>
+
+    <!--
+        功能说明：修改记录
+        参数说明：实体类
+        作者：莫宁辉，开发时间：2019-08-23，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <update id="update" parameterType="com.hzvanke.report.pojo.Company">
+        update project_data
+        <set>
+            <if test="projectId!=null and projectId!=''">projectId=#{projectId},</if>
+            <if test="ljdf!=null ">ljdf=#{ljdf},</if>
+            <if test="ljpm!=null ">ljpm=#{ljpm},</if>
+            <if test="ljqtyYbs!=null ">ljqtyYbs=#{ljqtyYbs},</if>
+            <if test="revisitType!=null and revisitType != '' ">revisitType=#{revisitType},</if>
+            <if test="bmys!=null ">bmys=#{bmys},</if>
+            <if test="createTime!=null ">createTime=#{createTime},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!--
+        功能说明：根据主键ID集合批量删除
+        参数说明：listKeyid：主键ID集合
+        作者：莫宁辉，开发时间：2019-08-23，版本号：1.1
+        最后编辑：，编辑时间：，版本号：
+     -->
+    <delete id="delete" parameterType="java.util.List">
+        delete from project_data
+        where id in
+        <foreach collection="listKeyid" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>
